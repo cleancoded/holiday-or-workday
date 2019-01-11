@@ -6,3 +6,4 @@ lib
 .environment
 lib
 .env
+.zapierapprc
