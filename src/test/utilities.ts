@@ -61,7 +61,6 @@ describe('Utilities', () => {
 
             should(() => Utilities.ValidateHolidayList(bundle))
                 .throw(/sf\/!1/);
-
         });
 
         it('should return true given list with date of the form DD/MM', () => {
@@ -124,9 +123,103 @@ describe('Utilities', () => {
             should(isHoliday).be.true();
         });
 
-        it('should return true given list with date of the form D/MM', () => {
+        it('should return true given list with a holiday name', () => {
             const holidayList: string[] = [
-                '7/04'
+                'Christmas'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with a holiday name', () => {
+            const holidayList: string[] = [
+                'Black Friday'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with a holiday name', () => {
+            const holidayList: string[] = [
+                'New Year\'s Day'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with a holiday name', () => {
+            const holidayList: string[] = [
+                '4th of July'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with a holiday with leading whitespace', () => {
+            const holidayList: string[] = [
+                '            New Year\'s Day'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with a holiday with trailing whitespace', () => {
+            const holidayList: string[] = [
+                'New Year\'s Day                                  '
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given list with mixed holidays', () => {
+            const holidayList: string[] = [
+                'New Year\'s Day',
+                'Christmas',
+                '07/04',
+                'Black Friday',
+                '1/1'
             ];
             const bundle = {
                 inputData: {

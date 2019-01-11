@@ -3,18 +3,20 @@ import { ZObject, Bundle } from "zapier-platform-core";
 const validateHolidayList = (bundle: Bundle | any, z?: ZObject): boolean => {
     let result = false;
     const holidayList: string[] = bundle.inputData.holiday_list || [];
-    const holidayNameRegExp = new RegExp('^[\w|\s]+$');
+    const holidayNameRegExp = new RegExp('^[a-zA-Z0-9]+[\\s\\w\']*$');
     const dateRegExp = new RegExp('^[0-9]{1,2}\/[0-9]{1,2}$');
 
     if (holidayList.length > 0) {
         for (let holiday of holidayList) {
-            const dateMatches = holiday.match(dateRegExp);
+            const trimmedHoliday = holiday.trim();
+            const dateMatches = trimmedHoliday.match(dateRegExp);
+            const nameMatches = trimmedHoliday.match(holidayNameRegExp);
 
-            if (dateMatches) {
+            if (dateMatches || nameMatches) {
                 result = true;
             }
             else {
-                const errorMessage = buildValidationErrorMessage(holiday);
+                const errorMessage = buildValidationErrorMessage(trimmedHoliday);
                 throw new Error(errorMessage);
             }
         }
