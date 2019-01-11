@@ -1,5 +1,15 @@
 import { ZObject, Bundle } from "zapier-platform-core";
 
+/*
+    Parse holiday list input
+    Is today a static date within the holiday list?
+    Fetch holidays for date input
+    Is there a US holiday today?
+        If yes
+            Is the holiday in our holiday list?
+                If yes, return true
+                If no, return false
+*/
 const queryHolidays = async (z: ZObject, bundle: Bundle) => {
     z.console.log(`inputData: ${JSON.stringify(bundle.inputData)}`);
 
@@ -32,7 +42,14 @@ const Holiday = {
                 helpText: 'The holiday name (Easter) or a static date (12/25)'
             }
         ],
-        perform: queryHolidays
+        perform: queryHolidays,
+        outputFields: [
+            {
+                key: 'is_holiday',
+                label: 'The date provided is a holiday',
+                type: 'boolean'
+            }
+        ]
     }
 };
 
