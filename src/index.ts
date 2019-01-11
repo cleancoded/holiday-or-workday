@@ -1,6 +1,8 @@
 const { version } = require("../package.json");
 import { version as platformVersion } from "zapier-platform-core";
 
+import Middleware from "./middleware";
+
 process.version;
 
 const App = {
@@ -9,7 +11,9 @@ const App = {
 
   beforeRequest: [],
 
-  afterResponse: [],
+  afterResponse: [
+    Middleware.HandleHttpError
+  ],
 
   resources: {},
 
