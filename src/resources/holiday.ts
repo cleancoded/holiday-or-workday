@@ -1,7 +1,7 @@
 import { ZObject, Bundle } from "zapier-platform-core";
 
 /*
-    Parse holiday list input
+    Validate holiday list input
     Is today a static date within the holiday list?
     Fetch holidays for date input
     Is there a US holiday today?
