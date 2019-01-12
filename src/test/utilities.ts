@@ -1,5 +1,7 @@
-import * as should from 'should';
 import { Bundle } from 'zapier-platform-core';
+import * as should from 'should';
+import * as moment from 'moment';
+
 import Utilities from '../utilities';
 
 describe('Utilities', () => {
@@ -228,6 +230,57 @@ describe('Utilities', () => {
             };
 
             const isHoliday = Utilities.ValidateHolidayList(bundle);
+
+            should(isHoliday).be.true();
+        });
+    });
+
+    describe('IsDateInHolidayList', () => {
+        it('should return false given empty holiday list', () => {
+            const date = new Date('2019-01-01');
+            const holidayList: string[] = [];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.IsDateInHolidayList(bundle, date);
+
+            should(isHoliday).be.false();
+        });
+
+        it('should return true given holiday is in holiday list', () => {
+            const date: moment.Moment = moment('2019-01-01');
+            const holidayList: string[] = [
+                '01/01'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.IsDateInHolidayList(bundle, date.toDate());
+
+            should(isHoliday).be.true();
+        });
+
+        it('should return true given holiday is in holiday list among many', () => {
+            const date: moment.Moment = moment('2019-01-01');
+            const holidayList: string[] = [
+                'New Year\'s Day',
+                '01/01',
+                'Black Friday',
+                '07/04'
+            ];
+            const bundle = {
+                inputData: {
+                    holiday_list: holidayList
+                }
+            };
+
+            const isHoliday = Utilities.IsDateInHolidayList(bundle, date.toDate());
 
             should(isHoliday).be.true();
         });
