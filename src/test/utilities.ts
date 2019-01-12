@@ -285,4 +285,111 @@ describe('Utilities', () => {
             should(isHoliday).be.true();
         });
     });
+
+    describe('CleanHolidayList', () => {
+        it('should return empty list given empty list', () => {
+            const input: string[] = [];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+
+            should(cleanedHolidays.length).eql(0);
+        });
+
+        it('should trim leading whitespace', () => {
+            const expectedHoliday = 'Kwanza';
+            const input: string[] = [
+                `              ${expectedHoliday}`
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should trim trailing whitespace', () => {
+            const expectedHoliday = 'Kwanza';
+            const input: string[] = [
+                `${expectedHoliday}            `
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should trim any whitespace', () => {
+            const expectedHoliday = 'Kwanza';
+            const input: string[] = [
+                `              ${expectedHoliday}                      `
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should format static dates in MM/DD form', () => {
+            const expectedHoliday = '12/25';
+            const input: string[] = [
+                '12/25'
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should format static dates in MM/DD form', () => {
+            const expectedHoliday = '02/14';
+            const input: string[] = [
+                '2/14'
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should format static dates in MM/DD form', () => {
+            const expectedHoliday = '01/01';
+            const input: string[] = [
+                '1/1'
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should format static dates in MM/DD form', () => {
+            const expectedHoliday = '01/01';
+            const input: string[] = [
+                '01/1'
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+
+        it('should format static dates in MM/DD form given mixed holiday list', () => {
+            const expectedHoliday = '02/14';
+            const input: string[] = [
+                '2/14',
+                'Christmas'
+            ];
+
+            const cleanedHolidays = Utilities.CleanHolidayList(input);
+            const actualHoliday = cleanedHolidays[0];
+
+            should(actualHoliday).eql(expectedHoliday);
+        });
+    });
 });
