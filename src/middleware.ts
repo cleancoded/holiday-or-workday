@@ -10,7 +10,7 @@ const handleHttpError = (response: HttpResponse, z: ZObject) => {
         throw new Error(`Got an unexpected response from Holiday API: ${response.content}`);
     }
 
-    return request;
+    return response;
 };
 
 const Middleware = {
