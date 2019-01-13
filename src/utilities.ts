@@ -22,9 +22,9 @@ const formatStaticHoliday = (staticHoliday: string): string => {
     return date.format('MM/DD');
 };
 
-const isDateInHolidayList = (bundle: Bundle | any, date: Date): boolean => {
+const isDateInHolidayList = (bundle: Bundle | any): boolean => {
     let result = false;
-    const inputDate: moment.Moment = moment(date);
+    const inputDate: moment.Moment = moment(bundle.inputData.date);
     const formattedDate: string = inputDate.format('MM/DD');
     const holidayList: string[] = bundle.inputData.holiday_list || [];
     const staticHolidays: string[] = holidayList.filter(filterNamedHolidays);

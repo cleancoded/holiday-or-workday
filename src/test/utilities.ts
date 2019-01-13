@@ -5,7 +5,7 @@ import * as moment from 'moment';
 import Utilities from '../utilities';
 
 describe('Utilities', () => {
-    describe('validateHolidayList', () => {
+    describe('ValidateHolidayList', () => {
         it('should return false given empty holiday list', () => {
             const holidayList: string[] = [];
             const bundle = {
@@ -241,11 +241,12 @@ describe('Utilities', () => {
             const holidayList: string[] = [];
             const bundle = {
                 inputData: {
-                    holiday_list: holidayList
+                    holiday_list: holidayList,
+                    date: date
                 }
             };
 
-            const isHoliday = Utilities.IsDateInHolidayList(bundle, date);
+            const isHoliday = Utilities.IsDateInHolidayList(bundle);
 
             should(isHoliday).be.false();
         });
@@ -257,11 +258,12 @@ describe('Utilities', () => {
             ];
             const bundle = {
                 inputData: {
-                    holiday_list: holidayList
+                    holiday_list: holidayList,
+                    date: date.toDate()
                 }
             };
 
-            const isHoliday = Utilities.IsDateInHolidayList(bundle, date.toDate());
+            const isHoliday = Utilities.IsDateInHolidayList(bundle);
 
             should(isHoliday).be.true();
         });
@@ -276,11 +278,12 @@ describe('Utilities', () => {
             ];
             const bundle = {
                 inputData: {
-                    holiday_list: holidayList
+                    holiday_list: holidayList,
+                    date: date.toDate()
                 }
             };
 
-            const isHoliday = Utilities.IsDateInHolidayList(bundle, date.toDate());
+            const isHoliday = Utilities.IsDateInHolidayList(bundle);
 
             should(isHoliday).be.true();
         });
