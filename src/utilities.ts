@@ -1,7 +1,7 @@
 import { Bundle } from "zapier-platform-core";
 import * as moment from 'moment';
 
-const holidayNameRegExp = new RegExp('^[a-zA-Z0-9]+[\\s\\w\']*$');
+const holidayNameRegExp = new RegExp('^[a-zA-Z0-9]+[\\s\\w\',.]*$');
 const dateRegExp = new RegExp('^[0-9]{1,2}\/[0-9]{1,2}$');
 
 const cleanHolidayList = (holidayList: string[]): string[] => {

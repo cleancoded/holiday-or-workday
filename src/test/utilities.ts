@@ -172,7 +172,7 @@ describe('Utilities', () => {
 
         it('should return true given list with a holiday name', () => {
             const holidayList: string[] = [
-                '4th of July'
+                'Martin Luther King, Jr. Day'
             ];
             const bundle = {
                 inputData: {
