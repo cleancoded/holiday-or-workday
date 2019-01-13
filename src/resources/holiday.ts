@@ -16,6 +16,7 @@ import { Holiday } from "../models/holiday";
 */
 const isDateHoliday = async (z: ZObject, bundle: Bundle | any) => {
     let isHoliday = false;
+    let holidayName: string = '';
 
     if (Utilities.ValidateHolidayList(bundle)) {
         if (Utilities.IsDateInHolidayList(bundle)) {
@@ -25,12 +26,20 @@ const isDateHoliday = async (z: ZObject, bundle: Bundle | any) => {
             let holidaysOnDate: Holiday[] = await queryHolidays(z, bundle);
 
             if (holidaysOnDate.length > 0) {
-                isHoliday = isApiHolidayInList(holidaysOnDate, bundle);
+                let isHolidayResult: any = isApiHolidayInList(holidaysOnDate, bundle);
+
+                if (isHolidayResult.found) {
+                    isHoliday = true;
+                    holidayName = isHolidayResult.name;
+                }
             }
         }
     }
 
-    return { is_holiday: isHoliday };
+    return { 
+        is_holiday: isHoliday,
+        holiday_name: holidayName
+     };
 };
 
 const queryHolidays = async (z: ZObject, bundle: Bundle) => {
@@ -54,8 +63,11 @@ const queryHolidays = async (z: ZObject, bundle: Bundle) => {
     return holidays;
 };
 
-const isApiHolidayInList = (apiHolidays: Holiday[], bundle: Bundle): boolean => {
-    let isHolidayInList = false;
+const isApiHolidayInList = (apiHolidays: Holiday[], bundle: Bundle): any => {
+    let isHolidayInList = {
+        found: false,
+        name: ''
+    };
 
     const inputHolidayList: string[] = bundle.inputData.holiday_list;
 
@@ -65,7 +77,8 @@ const isApiHolidayInList = (apiHolidays: Holiday[], bundle: Bundle): boolean => 
         });
 
         if (foundHolidayIndex > -1) {
-            isHolidayInList = true;
+            isHolidayInList.found = true;
+            isHolidayInList.name = apiHoliday.name;
         }
     });
 
@@ -95,7 +108,7 @@ const Holiday = {
                 required: true,
                 list: true,
                 type: 'text',
-                helpText: 'The holiday name (Easter) or a static date (12/25)'
+                helpText: 'The holiday name (Easter) or a static date (12/25). One holiday per line'
             }
         ],
         perform: isDateHoliday,
@@ -104,6 +117,11 @@ const Holiday = {
                 key: 'is_holiday',
                 label: 'The date provided is a holiday',
                 type: 'boolean'
+            },
+            {
+                key: 'holiday_name',
+                label: 'Holiday name',
+                type: 'string'
             }
         ]
     }
