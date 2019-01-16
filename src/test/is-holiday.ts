@@ -18,7 +18,7 @@ describe('Holiday', () => {
                 }
             };
 
-            const result = await appTester(App.creates.holiday.operation.perform, bundle);
+            const result = await appTester(App.creates.is_holiday.operation.perform, bundle);
 
             should(result.is_holiday).be.false();
         });
@@ -37,7 +37,7 @@ describe('Holiday', () => {
                 }
             };
 
-            const result = await appTester(App.creates.holiday.operation.perform, bundle);
+            const result = await appTester(App.creates.is_holiday.operation.perform, bundle);
 
             should(result.is_holiday).be.true();
         });
@@ -71,7 +71,7 @@ describe('Holiday', () => {
                     holidays: []
                 });
 
-            const result = await appTester(App.creates.holiday.operation.perform, bundle);
+            const result = await appTester(App.creates.is_holiday.operation.perform, bundle);
 
             should(result.is_holiday).be.false();
         });
@@ -112,7 +112,7 @@ describe('Holiday', () => {
                     ]
                 });
 
-            const result = await appTester(App.creates.holiday.operation.perform, bundle);
+            const result = await appTester(App.creates.is_holiday.operation.perform, bundle);
 
             should(result.is_holiday).be.true();
         });
@@ -159,7 +159,7 @@ describe('Holiday', () => {
                     ]
                 });
 
-            const result = await appTester(App.creates.holiday.operation.perform, bundle);
+            const result = await appTester(App.creates.is_holiday.operation.perform, bundle);
 
             should(result.is_holiday).be.true();
         });

@@ -1,6 +1,6 @@
 {
   "name": "is-holiday",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Zapier app to determine if today is a US holiday",
   "repository": "",
   "author": "Skye Griffin <skybox@trioptimum.com>",

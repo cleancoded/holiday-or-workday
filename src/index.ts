@@ -2,6 +2,7 @@ const { version } = require("../package.json");
 import { version as platformVersion } from "zapier-platform-core";
 
 import Middleware from "./middleware";
+import IsHoliday from "./resources/is-holiday";
 import Holiday from "./resources/holiday";
 
 process.version;
@@ -18,12 +19,14 @@ const App = {
 
   resources: {},
 
-  triggers: {},
+  triggers: {
+    [Holiday.key]: Holiday
+  },
 
   searches: {},
 
   creates: {
-    [Holiday.key]: Holiday
+    [IsHoliday.key]: IsHoliday
   }
 };
 
