@@ -44,7 +44,7 @@ const isDateHoliday = async (z: ZObject, bundle: Bundle | any) => {
 
 const queryHolidays = async (z: ZObject, bundle: Bundle) => {
     let holidays: Holiday[] = [];
-    const date: moment.Moment = moment(bundle.inputData.date);
+    const date: moment.Moment = moment(bundle.inputData.input_date);
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/holidays`, {
         method: 'GET',
         params: {
@@ -96,7 +96,7 @@ const IsHoliday = {
     operation: {
         inputFields: [
             {
-                key: 'date',
+                key: 'input_date',
                 label: 'Date',
                 required: true,
                 type: 'datetime',
@@ -107,9 +107,8 @@ const IsHoliday = {
                 key: 'holiday_list',
                 label: 'Holiday List',
                 required: true,
-                dynamic: 'holiday.name.name',
+                dynamic: 'holiday.id.name',
                 list: true,
-                type: 'text',
                 helpText: 'The holiday name (Easter) or a static date (12/25). One holiday per line'
             }
         ],

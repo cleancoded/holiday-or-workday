@@ -17,11 +17,11 @@ const App = {
     Middleware.HandleHttpError
   ],
 
-  resources: {},
-
-  triggers: {
+  resources: {
     [Holiday.key]: Holiday
   },
+
+  triggers: {},
 
   searches: {},
 

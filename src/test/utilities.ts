@@ -259,7 +259,7 @@ describe('Utilities', () => {
             const bundle = {
                 inputData: {
                     holiday_list: holidayList,
-                    date: date.toDate()
+                    input_date: date.toDate()
                 }
             };
 
@@ -279,7 +279,7 @@ describe('Utilities', () => {
             const bundle = {
                 inputData: {
                     holiday_list: holidayList,
-                    date: date.toDate()
+                    input_date: date.toDate()
                 }
             };
 

@@ -14,7 +14,7 @@ describe('Holiday', () => {
             const bundle = {
                 inputData: {
                     holiday_list: [],
-                    date: new Date()
+                    input_date: new Date()
                 }
             };
 
@@ -33,7 +33,7 @@ describe('Holiday', () => {
                         'Christmas',
                         '7/4'
                     ],
-                    date: date
+                    input_date: date
                 }
             };
 
@@ -51,7 +51,7 @@ describe('Holiday', () => {
                 inputData: {
                     holiday_list: [
                     ],
-                    date: date
+                    input_date: date
                 }
             };
 
@@ -86,7 +86,7 @@ describe('Holiday', () => {
                     holiday_list: [
                         'Christmas'
                     ],
-                    date: date
+                    input_date: date
                 }
             };
 
@@ -128,7 +128,7 @@ describe('Holiday', () => {
                         'Christmas',
                         'New Year\'s Day'
                     ],
-                    date: date
+                    input_date: date
                 }
             };
 
