@@ -5,9 +5,10 @@ import Constants from "../constants";
 import { Holiday } from "../models/holiday";
 
 const listHolidays = async (z: ZObject, bundle: Bundle) => {
-    let holidays: Holiday[] = [];
-    z.console.log('querying holidays, inputData: ', z.JSON.stringify(bundle.inputData));
+
+    let holidays: any[] = [];
     const date: moment.Moment = moment(bundle.inputData.date);
+
     const response: HttpResponse = await z.request(`${Constants.API_BASE}/holidays`, {
         method: 'GET',
         params: {
@@ -18,7 +19,17 @@ const listHolidays = async (z: ZObject, bundle: Bundle) => {
 
     if (response.json) {
         let apiResponse: any = response.json;
-        holidays = apiResponse.holidays;
+        let apiHolidays = apiResponse.holidays;
+
+        for (let holiday in apiHolidays) {
+            for (let holidayItem of apiHolidays[holiday]) {
+
+                holidays.push({
+                    id: holidayItem.name,
+                    name: holidayItem.name
+                });
+            }
+        }
     }
 
     return holidays;
